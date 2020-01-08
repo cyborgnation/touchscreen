@@ -13,11 +13,13 @@ var cols = 11;
 var rows = 15;
 
 function setup(){
-  createCanvas(windowWidth, windowHeight);
+  let density = displayDensity();
+  pixelDensity(density)
+  createCanvas(displayWidth, displayHeight);
   colorMode(HSB);
   engine = Engine.create();
   world = engine.world;
-  world.gravity.y = .95;
+  world.gravity.y = 1;
 
   // Creates spacing for pegs
   var spacing = width / cols;
@@ -43,7 +45,6 @@ function setup(){
     var b = new Boundary(x, y, w, h)
     bounds.push(b);
   }
-
 }
 
 function newParticle(){
