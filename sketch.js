@@ -13,8 +13,8 @@ var cols = 11;
 var rows = 15;
 
 function setup(){
-  let density = displayDensity();
-  pixelDensity(density)
+  // let density = displayDensity();
+  // pixelDensity(density)
   createCanvas(displayWidth, displayHeight);
   colorMode(HSB);
   engine = Engine.create({
@@ -40,10 +40,10 @@ function setup(){
   var b = new Boundary(width/2, height + 50, width, 100);
   bounds.push(b);
   // Creates left side wall
-  var b = new Boundary(0, height/2, 10, height);
+  var b = new Boundary(-5, height/2, 10, height);
   bounds.push(b);
   //Creates right side wall
-  var b = new Boundary(width, height/2, 10, height);
+  var b = new Boundary(width+5, height/2, 10, height);
   bounds.push(b);
   // Creates Buckets
   // for ( var i=0; i < cols + 2; i++) {
