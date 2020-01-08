@@ -1,8 +1,15 @@
 //module aliases
-// Stopping Point: Part 3 10:53 - Editing Engine Refresh rate
+// Need to figure out how to import VMLYR snowflake SVG - review SVG demo.
 var Engine = Matter.Engine,
-  World = Matter.World,
-  Bodies = Matter.Bodies;
+    World = Matter.World,
+    Bodies = Matter.Bodies,
+    Render = Matter.Render,
+    Runner = Matter.Runner,
+    Common = Matter.Common,
+    MouseConstraint = Matter.MouseConstraint,
+    Mouse = Matter.Mouse,
+    Svg = Matter.Svg,
+    Vertices = Matter.Vertices;
 
 var engine;
 var world;
@@ -62,12 +69,10 @@ function newParticle(){
   particles.push(p);
 }
 
-
 function draw() {
   // Drop balls while mouse is pressed
   if (mouseIsPressed){
     newParticle();
-    console.log(particles)
   }
 
   background(0);
