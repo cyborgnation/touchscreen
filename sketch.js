@@ -17,7 +17,9 @@ function setup(){
   pixelDensity(density)
   createCanvas(displayWidth, displayHeight);
   colorMode(HSB);
-  engine = Engine.create();
+  engine = Engine.create({
+    enableSleeping: true
+  }),
   world = engine.world;
   world.gravity.y = 1;
 
