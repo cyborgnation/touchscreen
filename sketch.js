@@ -1,0 +1,84 @@
+//module aliases
+// Stopping Point: Part 3 10:53 - Editing Engine Refresh rate
+var Engine = Matter.Engine,
+  World = Matter.World,
+  Bodies = Matter.Bodies;
+
+var engine;
+var world;
+var particles = [];
+var pegs = [];
+var bounds =[];
+var cols = 11;
+var rows = 15;
+
+function setup(){
+  createCanvas(windowWidth, windowHeight);
+  colorMode(HSB);
+  engine = Engine.create();
+  world = engine.world;
+  world.gravity.y = .8;
+
+  newParticle();
+  // Creates spacing for pegs
+  var spacing = width / cols;
+  for ( var j=0; j < rows; j++) {
+      for ( var i=0; i < cols + 1; i++) {
+        var x = i * spacing;
+        if (j % 2 == 0) {
+          x += spacing / 2;
+        }
+        var y = spacing + j * spacing;
+        var p = new Peg(x, y, 8);
+        pegs.push(p);
+      }
+  }
+// Creates boundaries and buckets
+  var b = new Boundary(width/2, height + 50, width, 100);
+  bounds.push(b);
+  for ( var i=0; i < cols + 2; i++) {
+    var x = i * spacing;
+    var h = 100;
+    var w = 10;
+    var y = height - h / 2;
+    var b = new Boundary(x, y, w, h)
+    bounds.push(b);
+  }
+
+}
+
+function newParticle(){
+  var p = new Particle(mouseX, mouseY, 10);
+  particles.push(p);
+}
+function draw() {
+  // Drop balls while mouse is pressed
+  if (mouseIsPressed){
+    newParticle();
+  }
+  background(0);
+  Engine.update(engine, 16.666);
+// Remove particles that fall off the sides of the viewport
+  for (var i = 0; i<particles.length; i++){
+    particles[i].show();
+    if (particles[i].isOffScreen()) {
+      World.remove(world, particles[i].body);
+      particles.splice(i, 1);
+      i--;
+    }
+// Start removing particles if there are more than 450
+    if (particles.length>450){
+      World.remove(world, particles[i].body);
+      particles.splice(i, 1);
+      i--;
+    }
+  }
+
+  for (var i = 0; i< pegs.length; i++){
+    pegs[i].show();
+  }
+  for (var i = 0; i< bounds.length; i++){
+    bounds[i].show();
+  }
+
+}
