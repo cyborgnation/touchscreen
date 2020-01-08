@@ -34,17 +34,24 @@ function setup(){
         pegs.push(p);
       }
   }
-// Creates boundaries and buckets
+  // Creates bottom boundary
   var b = new Boundary(width/2, height + 50, width, 100);
   bounds.push(b);
-  for ( var i=0; i < cols + 2; i++) {
-    var x = i * spacing;
-    var h = 100;
-    var w = 10;
-    var y = height - h / 2;
-    var b = new Boundary(x, y, w, h)
-    bounds.push(b);
-  }
+  // Creates left side wall
+  var b = new Boundary(0, height/2, 10, height);
+  bounds.push(b);
+  //Creates right side wall
+  var b = new Boundary(width, height/2, 10, height);
+  bounds.push(b);
+  // Creates Buckets
+  // for ( var i=0; i < cols + 2; i++) {
+  //   var x = i * spacing;
+  //   var h = 100;
+  //   var w = 10;
+  //   var y = height - h / 2;
+  //   var b = new Boundary(x, y, w, h)
+  //   bounds.push(b);
+  // }
 }
 
 function newParticle(){
