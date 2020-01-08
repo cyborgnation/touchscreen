@@ -1,5 +1,8 @@
+
 function Particle(x, y, r){
-  this.hue = random(360);
+  // this.blueShade = random(['196, 100, 94,', '196, 70, 94', '196, 40, 94', '196, 20, 94', '249, 100, 18']);
+  this.blueShade = random(['#00AEEF','#6BD7FF', '#A4E6FF', '#07002D', '#D6F4FF']);
+
   var options = {
     restitution: 0.5,
     friction: 0,
@@ -17,8 +20,10 @@ Particle.prototype.isOffScreen = function(){
   return (x< -50 || x > width + 50)
 }
 
+
+
 Particle.prototype.show = function() {
-  fill(this.hue, 255, 255);
+  fill(this.blueShade);
   strokeWeight(0);
   var pos = this.body.position;
   push();

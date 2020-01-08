@@ -67,6 +67,7 @@ function draw() {
   // Drop balls while mouse is pressed
   if (mouseIsPressed){
     newParticle();
+    console.log(particles)
   }
 
   background(0);
@@ -109,5 +110,4 @@ function clearAll(){
 
   World.remove(world, particles);
   particles.splice(i, all)
-  console.log("clear shit");
 }
