@@ -17,9 +17,8 @@ function setup(){
   colorMode(HSB);
   engine = Engine.create();
   world = engine.world;
-  world.gravity.y = .8;
+  world.gravity.y = .95;
 
-  newParticle();
   // Creates spacing for pegs
   var spacing = width / cols;
   for ( var j=0; j < rows; j++) {
@@ -29,7 +28,7 @@ function setup(){
           x += spacing / 2;
         }
         var y = spacing + j * spacing;
-        var p = new Peg(x, y, 8);
+        var p = new Peg(x, y, width/90);
         pegs.push(p);
       }
   }
@@ -48,7 +47,8 @@ function setup(){
 }
 
 function newParticle(){
-  var p = new Particle(mouseX, mouseY, 10);
+  var radius = width/100;
+  var p = new Particle(mouseX, mouseY, radius);
   particles.push(p);
 }
 function draw() {
@@ -56,22 +56,25 @@ function draw() {
   if (mouseIsPressed){
     newParticle();
   }
+
   background(0);
+
   Engine.update(engine, 16.666);
-// Remove particles that fall off the sides of the viewport
+
   for (var i = 0; i<particles.length; i++){
     particles[i].show();
+    // Remove particles that fall off the sides of the viewport
     if (particles[i].isOffScreen()) {
       World.remove(world, particles[i].body);
       particles.splice(i, 1);
       i--;
     }
-// Start removing particles if there are more than 450
-    if (particles.length>450){
-      World.remove(world, particles[i].body);
-      particles.splice(i, 1);
-      i--;
-    }
+    // Start removing particles if there are more than 450
+    // if (particles.length>450){
+    //   World.remove(world, particles[i].body);
+    //   particles.splice(i, 1);
+    //   i--;
+    // }
   }
 
   for (var i = 0; i< pegs.length; i++){
@@ -80,5 +83,8 @@ function draw() {
   for (var i = 0; i< bounds.length; i++){
     bounds[i].show();
   }
+}
 
+function clear(){
+  particles.length = 0;
 }
