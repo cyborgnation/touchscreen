@@ -61,6 +61,8 @@ function newParticle(){
   var p = new Particle(mouseX, mouseY, radius);
   particles.push(p);
 }
+
+
 function draw() {
   // Drop balls while mouse is pressed
   if (mouseIsPressed){
@@ -95,6 +97,17 @@ function draw() {
   }
 }
 
-function clear(){
-  particles.length = 0;
+function clearAll(){
+  for (var i = 0; i<particles.length; i++){
+    particles[i].show();
+    World.remove(world, particles[i].body);
+    particles.splice(i, 1);
+    i--;
+  }
+
+  var all = particles.length;
+
+  World.remove(world, particles);
+  particles.splice(i, all)
+  console.log("clear shit");
 }
